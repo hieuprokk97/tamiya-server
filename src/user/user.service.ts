@@ -22,7 +22,6 @@ export class UserService {
       .createQueryBuilder()
       .where('LOWER(UNACCENT(name)) = :name', { name: normalizedUsername })
       .getExists();
-    console.log('🚀 ~ existUser:', existUser);
 
     if (existUser) {
       throw new ExceptionResponse(HttpStatus.BAD_REQUEST, 'Tên người dùng đã tồn tại');
