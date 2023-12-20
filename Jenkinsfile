@@ -12,16 +12,14 @@ pipeline{
         script {
             mail to: 'tamiyabuild@gmail.com',
                  subject: 'Build thành công Server của app Tamiya',
-                 body: 'Build thành công ',
-                 attachLog: true
+                 body: 'Build thành công '
         }
     }
     failure {
         script {
             mail to: 'tamiyabuild@gmail.com',
                  subject: 'Build lỗi Server của app Tamiya',
-                 body: 'Build lỗi',
-                 attachLog: true
+                 body: 'Build lỗi'
         }
     }
 }
