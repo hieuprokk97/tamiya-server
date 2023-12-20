@@ -12,7 +12,7 @@ pipeline{
         script {
             mail to: 'tamiyabuild@gmail.com',
                  subject: 'Build thành công Server của app Tamiya',
-                 body: 'Build thành công'
+                 body: `Build thành công \nXem thêm chi tiết\n\nBuild Number: ${BUILD_NUMBER}\nVersion: ${VERSION_NUMBER}`,
         }
     }
     failure {
