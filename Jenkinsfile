@@ -9,18 +9,30 @@ pipeline{
     }
     post {
     success {
-        script {
-            mail to: 'tamiyabuild@gmail.com',
-                 subject: 'Build thành công Server của app Tamiya',
-                 body: 'Build thành công \nXem thêm chi tiết\nBuild Number: ${BUILD_NUMBER}\nVersion: ${VERSION_NUMBER}'
-        }
+        emailext (
+            to: 'tamiyabuild@gmail.com', 
+            subject: "Build Success - Version ${VERSION_NUMBER}", 
+            body: """Custom content for success email.
+            See attached log for details.
+            
+            Build Number: ${BUILD_NUMBER}
+            Version: ${VERSION_NUMBER}
+            """,
+            attachLog: true
+        )
     }
     failure {
-        script {
-            mail to: 'tamiyabuild@gmail.com',
-                 subject: 'Build lỗi Server của app Tamiya',
-                 body: 'Build lỗi'
-        }
+        emailext (
+            to: 'tamiyabuild@gmail.com', 
+            subject: "Build Failure - Version ${VERSION_NUMBER}", 
+            body: """Custom content for failure email.
+            See attached log for details.
+            
+            Build Number: ${BUILD_NUMBER}
+            Version: ${VERSION_NUMBER}
+            """,
+            attachLog: true
+        )
     }
     }
 }
