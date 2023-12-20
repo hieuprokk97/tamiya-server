@@ -21,4 +21,10 @@ export class UserController {
     const data = await this.userService.findAll();
     return res.status(HttpStatus.OK).send(new BaseResponse({ data }));
   }
+
+  @Post('delete')
+  async removeAll(@Res() res: Response) {
+    const data = await this.userService.removeAll();
+    return res.status(HttpStatus.OK).send(new BaseResponse({ data }));
+  }
 }

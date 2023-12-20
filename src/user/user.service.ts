@@ -37,14 +37,15 @@ export class UserService {
   async findAll() {
     const user = await this.userRepository.find();
     return user;
-    return `This action returns all user`;
   }
 
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
 
-  removeAll() {
-    return 'Hello';
+  async removeAll() {
+    await this.userRepository.clear();
+    const query = `SELECT setval('user_id_seq', 1, false);`;
+    await this.userRepository.query(query);
   }
 }
