@@ -39,13 +39,20 @@ export class UserService {
     return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    console.log("🚀 ~ id:", id)
+    await this.userRepository.delete(id);
+    await this.userRepository.query(`
+      UPDATE "user"
+      SET id = id - 1
+      WHERE id > ${id}
+    `);
   }
 
   async removeAll() {
     await this.userRepository.clear();
     const query = `SELECT setval('user_id_seq', 1, false);`;
     await this.userRepository.query(query);
+    return { message: 'Tất cả đã được xóa' };
   }
 }
