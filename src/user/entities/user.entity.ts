@@ -1,12 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 
 @Entity('user')
 export class UserEntity {
-  @PrimaryGeneratedColumn('identity', {
+  @PrimaryColumn({
     type: 'bigint',
   })
-  id: string;
+  id: number;
 
   @Column({
     type: 'varchar',
@@ -19,4 +19,23 @@ export class UserEntity {
     default: 0,
   })
   score: number;
+
+  @Column({
+    type: 'smallint',
+    nullable: true,
+    default: 0,
+  })
+  isChecked: number;
+
+  @Column({
+    type: 'smallint',
+    nullable: true,
+    default: 0,
+  })
+  isInFinal: number;
+
+  @Column({
+    type: 'varchar',
+  })
+  lowerName: string;
 }
